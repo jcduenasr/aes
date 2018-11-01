@@ -1,0 +1,204 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server Calculator server."
+  version: "1.0.0"
+  title: "ApiCalculator"
+  contact:
+    email: "duenasr.juanc@javeriana.eedu.co"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+host: "apiCalculator"
+basePath: "/v1"
+tags:
+- name: "sum"
+  description: "Returns the result of the sum of two numbers"
+- name: "res"
+  description: "Returns the result of the subtraction of two numbers"
+- name: "mul"
+  description: "Returns the result of the multiplication  of two numbers"
+- name: "div"
+  description: "Returns the result of the multiplication  of two numbers"
+schemes:
+- "https"
+- "http"
+paths:
+  /sum/{num1}/{num2}:
+    get:
+      tags:
+      - "sum"
+      summary: "Sum two numbers"
+      description: "Returns the sum"
+      operationId: "getSum"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "num1"
+        in: "path"
+        description: "First Number to sum"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "num2"
+        in: "path"
+        description: "Second Number to sum"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Sum"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pet not found"
+      security:
+      - api_key: []
+  /res/{num1}/{num2}:
+    get:
+      tags:
+      - "res"
+      summary: "Sum two numbers"
+      description: "Returns the subtraction "
+      operationId: "getRes"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "num1"
+        in: "path"
+        description: "First Number to substract"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "num2"
+        in: "path"
+        description: "Second Number to substract"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Sum"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pet not found"
+      security:
+      - api_key: []
+  /mul/{num1}/{num2}:
+    get:
+      tags:
+      - "mul"
+      summary: "Multiply two numbers"
+      description: "Returns the multiplication"
+      operationId: "getMul"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "num1"
+        in: "path"
+        description: "First Number to multiply"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "num2"
+        in: "path"
+        description: "Second Number to multiply"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Sum"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pet not found"
+      security:
+      - api_key: []
+  /div/{num1}/{num2}:
+    get:
+      tags:
+      - "div"
+      summary: "Divide two numbers"
+      description: "Returns the division"
+      operationId: "getDiv"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "num1"
+        in: "path"
+        description: "First Number to divide"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "num2"
+        in: "path"
+        description: "Second Number to divide"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Sum"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pet not found"
+      security:
+      - api_key: []
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  Sum:
+    type: "object"
+    properties:
+      result:
+        type: "string"
+        example: "4"
+  Res:
+    type: "object"
+    properties:
+      result:
+        type: "string"
+        example: "4"
+  Mul:
+    type: "object"
+    properties:
+      result:
+        type: "string"
+        example: "4"
+  Div:
+    type: "object"
+    properties:
+      result:
+        type: "string"
+        example: "4"      
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
