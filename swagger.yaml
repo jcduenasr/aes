@@ -12,18 +12,18 @@ host: "apiCalculator"
 basePath: "/v1"
 tags:
 - name: "sum"
-  description: "Returns the result of the sum of two numbers"
+  description: "Returns the result of the sum of n numbers"
 - name: "res"
   description: "Returns the result of the subtraction of two numbers"
 - name: "mul"
-  description: "Returns the result of the multiplication  of two numbers"
+  description: "Returns the result of the multiplication  of n numbers"
 - name: "div"
   description: "Returns the result of the multiplication  of two numbers"
 schemes:
 - "https"
 - "http"
 paths:
-  /sum/{num1}/{num2}:
+  /sum/{num1}/..{numn}:
     get:
       tags:
       - "sum"
@@ -39,9 +39,9 @@ paths:
         required: true
         type: "integer"
         format: "int64"
-      - name: "num2"
+      - name: "numn"
         in: "path"
-        description: "Second Number to sum"
+        description: "N Number to sum"
         required: true
         type: "integer"
         format: "int64"
@@ -53,14 +53,12 @@ paths:
         400:
           description: "Invalid ID supplied"
         404:
-          description: "Pet not found"
-      security:
-      - api_key: []
+          description: "Operation not found"
   /res/{num1}/{num2}:
     get:
       tags:
       - "res"
-      summary: "Sum two numbers"
+      summary: "Substract two numbers"
       description: "Returns the subtraction "
       operationId: "getRes"
       produces:
@@ -82,18 +80,16 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Sum"
+            $ref: "#/definitions/Res"
         400:
           description: "Invalid ID supplied"
         404:
-          description: "Pet not found"
-      security:
-      - api_key: []
-  /mul/{num1}/{num2}:
+          description: "Operation not found"
+  /mul/{num1}/..{numn}:
     get:
       tags:
       - "mul"
-      summary: "Multiply two numbers"
+      summary: "Multiply n numbers"
       description: "Returns the multiplication"
       operationId: "getMul"
       produces:
@@ -105,9 +101,9 @@ paths:
         required: true
         type: "integer"
         format: "int64"
-      - name: "num2"
+      - name: "numn"
         in: "path"
-        description: "Second Number to multiply"
+        description: "N Number to multiply"
         required: true
         type: "integer"
         format: "int64"
@@ -115,13 +111,11 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Sum"
+            $ref: "#/definitions/Mul"
         400:
           description: "Invalid ID supplied"
         404:
-          description: "Pet not found"
-      security:
-      - api_key: []
+          description: "Operation not found"
   /div/{num1}/{num2}:
     get:
       tags:
@@ -148,57 +142,45 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Sum"
+            $ref: "#/definitions/Div"
         400:
           description: "Invalid ID supplied"
         404:
-          description: "Pet not found"
-      security:
-      - api_key: []
-securityDefinitions:
-  petstore_auth:
-    type: "oauth2"
-    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
-    flow: "implicit"
-    scopes:
-      write:pets: "modify pets in your account"
-      read:pets: "read your pets"
-  api_key:
-    type: "apiKey"
-    name: "api_key"
-    in: "header"
+          description: "Operation not found"
 definitions:
   Sum:
     type: "object"
     properties:
-      result:
+      operation:
         type: "string"
-        example: "4"
+        example: "sum"
+      result:
+        type: "integer"
+        example:  4 
   Res:
     type: "object"
     properties:
-      result:
+      operation:
         type: "string"
-        example: "4"
+        example: "res"
+      result:
+        type: "integer"
+        example:  4 
   Mul:
     type: "object"
     properties:
-      result:
+      operation:
         type: "string"
-        example: "4"
+        example: "mul"
+      result:
+        type: "integer"
+        example:  4 
   Div:
     type: "object"
     properties:
+      operation:
+        type: "string"
+        example: "div"
       result:
-        type: "string"
-        example: "4"      
-  ApiResponse:
-    type: "object"
-    properties:
-      code:
         type: "integer"
-        format: "int32"
-      type:
-        type: "string"
-      message:
-        type: "string"
+        example:  4     

@@ -1,0 +1,65 @@
+#%RAML 1.0
+title: Baeldung Foo REST Services API
+version: v1
+protocols: [ HTTPS ]
+baseUri: http://rest-api.baeldung.com/api/{version}
+baseUriParameters: {}
+documentation:
+- title: Calculator API
+  content: 'This is a sample server Calculator server'
+/sum:
+  /{num1}/..{numn}:      
+    description: Returns the result of the sum of n numbers
+    get:
+      description: Returns the sum
+      responses:
+        200:
+          body:
+            application/json:
+              example: { "operation" : "sum", "result" : 4 }
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Operation not found"
+/res:
+  /{num1}/{num2}:      
+    description: Returns the result of the substraction of 2 numbers
+    get:
+      description: Returns the substraction
+      responses:
+        200:
+          body:
+            application/json:
+              example: { "operation" : "res", "result" : 4 }
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Operation not found"
+/mul:
+  /{num1}/..{numn}:      
+    description: Returns the result of the multiplication of n numbers
+    get:
+      description: Returns the multiplication
+      responses:
+        200:
+          body:
+            application/json:
+              example: { "operation" : "mul", "result" : 4 }
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Operation not found"
+/div:
+  /{num1}/{num2}:      
+    description: Returns the result of the division of 2 numbers
+    get:
+      description: Returns the division
+      responses:
+        200:
+          body:
+            application/json:
+              example: { "operation" : "div", "result" : 4 }
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Operation not found"

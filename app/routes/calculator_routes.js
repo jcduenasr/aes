@@ -5,14 +5,14 @@ module.exports = function(app) {
         for (var current in numbersArray) {
             result = result + Number(numbersArray[current])
         }
-        res.send(`Result: ${result}`)
+        res.send({ operation: 'sum', result:  result});
     });
 
     app.get('/res/:num1/:num2', (req, res) => {
         const num1 = req.params.num1;
         const num2 = req.params.num2;
         var result = num1 - num2
-        res.send(`Result: ${result}`)
+        res.send({ operation: 'res', result:  result});
     });
 
     app.get(/^\/mul\/(.+)/, (req, res) => {
@@ -21,13 +21,13 @@ module.exports = function(app) {
         for (var current in numbersArray) {
             result = result * Number(numbersArray[current])
         }
-        res.send(`Result: ${result}`)
+        res.send({ operation: 'mul', result:  result});
     });
 
     app.get('/div/:num1/:num2', (req, res) => {
         const num1 = req.params.num1;
         const num2 = req.params.num2;
         var result = num1 / num2
-        res.send(`Result: ${result}`)
+        res.send({ operation: 'div', result:  result});
     });
 };
